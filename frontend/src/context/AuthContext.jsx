@@ -27,9 +27,11 @@ export const AuthProvider = ({ children }) => {
             setUser(data);
 
             // Redirect based on role
-            if (data.role === 'admin') navigate('/dashboard/admin');
-            else if (data.role === 'faculty') navigate('/dashboard/faculty');
-            else navigate('/events');
+            // Redirect based on role
+            if (data.role === 'admin') navigate('/admin/dashboard');
+            else if (data.role === 'faculty' || data.role === 'coordinator') navigate('/coordinator/dashboard');
+            else if (data.role === 'student') navigate('/student/dashboard');
+            else navigate('/dashboard');
 
             return { success: true };
         } catch (error) {
@@ -49,9 +51,11 @@ export const AuthProvider = ({ children }) => {
             setUser(data);
 
             // Redirect based on role
-            if (data.role === 'admin') navigate('/dashboard/admin');
-            else if (data.role === 'faculty') navigate('/dashboard/faculty');
-            else navigate('/events');
+            // Redirect based on role
+            if (data.role === 'admin') navigate('/admin/dashboard');
+            else if (data.role === 'faculty' || data.role === 'coordinator') navigate('/coordinator/dashboard');
+            else if (data.role === 'student') navigate('/student/dashboard');
+            else navigate('/dashboard');
 
             return { success: true };
         } catch (error) {

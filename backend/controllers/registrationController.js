@@ -42,7 +42,7 @@ const registerEvent = asyncHandler(async (req, res) => {
 // @access  Private
 const getMyRegistrations = asyncHandler(async (req, res) => {
     const registrations = await Registration.find({ user: req.user._id })
-        .populate('event', 'title date time venue')
+        .populate('event', 'title eventDate startTime venue status')
         .sort({ registeredAt: -1 });
     res.json(registrations);
 });

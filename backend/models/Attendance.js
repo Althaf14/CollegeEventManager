@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const registrationSchema = mongoose.Schema({
+const attendanceSchema = mongoose.Schema({
     event: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
@@ -13,10 +13,10 @@ const registrationSchema = mongoose.Schema({
     },
     status: {
         type: String,
-        enum: ['registered', 'cancelled'],
-        default: 'registered',
+        enum: ['Present', 'Absent'],
+        default: 'Absent',
     },
-    registeredAt: {
+    markedAt: {
         type: Date,
         default: Date.now,
     },
@@ -24,9 +24,9 @@ const registrationSchema = mongoose.Schema({
     timestamps: true,
 });
 
-// Prevent duplicate registrations for the same event by the same student
-registrationSchema.index({ event: 1, student: 1 }, { unique: true });
+// Ensure one attendance record per student per event
+attendanceSchema.index({ event: 1, student: 1 }, { unique: true });
 
-const Registration = mongoose.model('Registration', registrationSchema);
+const Attendance = mongoose.model('Attendance', attendanceSchema);
 
-module.exports = Registration;
+module.exports = Attendance;

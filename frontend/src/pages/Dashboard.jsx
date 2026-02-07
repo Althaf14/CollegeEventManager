@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import FacultyDashboard from '../components/FacultyDashboard';
 import AdminDashboard from '../components/AdminDashboard';
+import CoordinatorDashboard from '../components/CoordinatorDashboard';
+import StudentDashboard from '../components/StudentDashboard';
 
 const Dashboard = () => {
     const [user, setUser] = useState(null);
@@ -62,28 +64,12 @@ const Dashboard = () => {
                     </div>
                 )}
 
-                {user.role === 'faculty' && (
-                    <FacultyDashboard />
+                {(user.role === 'faculty' || user.role === 'coordinator') && (
+                    <CoordinatorDashboard />
                 )}
 
                 {user.role === 'student' && (
-                    <div className="bg-gray-800 p-6 rounded-lg shadow-lg col-span-1 md:col-span-2">
-                        <h2 className="text-xl font-bold mb-4">Student Actions</h2>
-                        <div className="flex gap-4">
-                            <button
-                                onClick={() => navigate('/events')}
-                                className="bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded flex-1"
-                            >
-                                Browse Events
-                            </button>
-                            <button
-                                onClick={() => navigate('/my-registrations')}
-                                className="bg-green-600 hover:bg-green-800 text-white font-bold py-2 px-4 rounded flex-1"
-                            >
-                                My Registrations
-                            </button>
-                        </div>
-                    </div>
+                    <StudentDashboard />
                 )}
             </div>
         </div>

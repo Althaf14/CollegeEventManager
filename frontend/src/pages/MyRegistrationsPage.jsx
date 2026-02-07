@@ -48,7 +48,7 @@ const MyRegistrationsPage = () => {
                                     <tr key={reg._id} className="hover:bg-gray-750">
                                         <td className="py-4 px-6 font-medium text-white">{reg.event?.title || 'Unknown Event'}</td>
                                         <td className="py-4 px-6">
-                                            {reg.event?.date ? new Date(reg.event.date).toLocaleDateString() : 'N/A'} - {reg.event?.time || ''}
+                                            {reg.event?.eventDate ? new Date(reg.event.eventDate).toLocaleDateString() : 'N/A'} - {reg.event?.startTime || ''}
                                         </td>
                                         <td className="py-4 px-6">{reg.event?.venue || 'N/A'}</td>
                                         <td className="py-4 px-6 capitalize">

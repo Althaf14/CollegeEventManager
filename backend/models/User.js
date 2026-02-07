@@ -17,12 +17,26 @@ const userSchema = mongoose.Schema({
     },
     role: {
         type: String,
-        enum: ['student', 'faculty', 'admin'],
+        enum: ['student', 'faculty', 'admin', 'coordinator'],
         default: 'student',
     },
     department: {
         type: String,
         required: false,
+    },
+    phone: {
+        type: String,
+        required: false,
+    },
+    profileImage: {
+        type: String,
+        required: false,
+        default: 'https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg',
+    },
+    bio: {
+        type: String,
+        required: false,
+        maxLength: 200,
     },
 }, {
     timestamps: true,

@@ -5,6 +5,8 @@ const connectDB = require('./config/db');
 const authRoutes = require('./routes/authRoutes');
 const eventRoutes = require('./routes/eventRoutes');
 const registrationRoutes = require('./routes/registrationRoutes');
+const attendanceRoutes = require('./routes/attendanceRoutes');
+const dashboardRoutes = require('./routes/dashboardRoutes');
 const { notFound, errorHandler } = require('./middleware/errorMiddleware');
 
 dotenv.config();
@@ -18,6 +20,10 @@ app.use(express.json());
 // Database Connection
 connectDB();
 
+// Make uploads folder static
+const path = require('path');
+app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
+
 // Routes
 app.get('/', (req, res) => {
     res.send('API is running...');
@@ -26,6 +32,10 @@ app.get('/', (req, res) => {
 app.use('/api/auth', authRoutes);
 app.use('/api/events', eventRoutes);
 app.use('/api/registrations', registrationRoutes);
+app.use('/api/my-attendance', attendanceRoutes);
+app.use('/api/dashboard', dashboardRoutes);
+app.use('/api/reports', require('./routes/reportRoutes'));
+app.use('/api/profile', require('./routes/profileRoutes'));
 
 app.use(notFound);
 app.use(errorHandler);

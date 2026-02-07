@@ -48,4 +48,13 @@ const facultyOrAdmin = (req, res, next) => {
     }
 };
 
-module.exports = { protect, admin, facultyOrAdmin };
+const adminOrCoordinator = (req, res, next) => {
+    if (req.user && (req.user.role === 'admin' || req.user.role === 'coordinator')) {
+        next();
+    } else {
+        res.status(401);
+        throw new Error('Not authorized as admin or coordinator');
+    }
+};
+
+module.exports = { protect, admin, facultyOrAdmin, adminOrCoordinator };
